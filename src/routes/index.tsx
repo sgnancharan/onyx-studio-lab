@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sun, Moon, Menu, X, Sparkles, Cpu, Palette, Globe, Wifi, MapPin,
-  FileText, ArrowRight, Phone, MessageCircle, Shield, Check,
+  FileText, ArrowRight, Phone, MessageCircle, Shield, Check, History,
+  Smartphone, QrCode, GraduationCap,
 } from "lucide-react";
 import { toast } from "sonner";
 import { createFileRoute } from "@tanstack/react-router";
@@ -38,6 +39,10 @@ const SERVICES = [
   { icon: Globe, title: "Web Development & Hosting", desc: "Interactive websites built fast for local businesses, with monthly hosting & maintenance plans." },
   { icon: Wifi, title: "Smart TV & Home Tech Setup", desc: "Smart TV ad-blocking, Wi-Fi dead-zone fixing, NAS personal cloud setups, and PC deep cleaning.", tag: "₹500/visit" },
   { icon: MapPin, title: "Google Maps & WhatsApp Business", desc: "Get your local shop verified on Google Maps with automated WhatsApp business greeting bots." },
+  { icon: History, title: "AI Heritage Photo Restoration", desc: "Bring faded, torn, or black-and-white family photos back to life. Colorized, enhanced, printed in high-res, and elegantly framed." },
+  { icon: Smartphone, title: "NFC Smart Business Cards", desc: "The last business card you will ever need. Tap to share your custom digital profile, built and hosted by us." },
+  { icon: QrCode, title: "Digital QR Menus for Restaurants", desc: "Sleek, contactless digital menus for your cafe, complete with premium acrylic table standees." },
+  { icon: GraduationCap, title: "Academic & Professional Portfolios", desc: "Stand out for US/UK Master's applications or tech interviews with a custom, interactive personal website." },
 ];
 
 const ESTIMATOR = [
@@ -197,7 +202,7 @@ function Services() {
   return (
     <section id="services" className="relative py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow="What we build" title={<>Six services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally." />
+        <SectionHeading eyebrow="What we build" title={<>Ten services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally." />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ delay: i * 0.05 }}>
