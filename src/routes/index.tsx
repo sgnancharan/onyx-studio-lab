@@ -39,6 +39,10 @@ const SERVICES = [
   { icon: Globe, title: "Web Development & Hosting", desc: "Interactive websites built fast for local businesses, with monthly hosting & maintenance plans." },
   { icon: Wifi, title: "Smart TV & Home Tech Setup", desc: "Smart TV ad-blocking, Wi-Fi dead-zone fixing, NAS personal cloud setups, and PC deep cleaning.", tag: "₹500/visit" },
   { icon: MapPin, title: "Google Maps & WhatsApp Business", desc: "Get your local shop verified on Google Maps with automated WhatsApp business greeting bots." },
+  { icon: History, title: "AI Heritage Photo Restoration", desc: "Bring faded, torn, or black-and-white family photos back to life. Colorized, enhanced, printed in high-res, and elegantly framed." },
+  { icon: Smartphone, title: "NFC Smart Business Cards", desc: "The last business card you will ever need. Tap to share your custom digital profile, built and hosted by us." },
+  { icon: QrCode, title: "Digital QR Menus for Restaurants", desc: "Sleek, contactless digital menus for your cafe, complete with premium acrylic table standees." },
+  { icon: GraduationCap, title: "Academic & Professional Portfolios", desc: "Stand out for US/UK Master's applications or tech interviews with a custom, interactive personal website." },
 ];
 
 const ESTIMATOR = [
