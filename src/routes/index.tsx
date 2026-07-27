@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sun, Moon, Menu, X, Sparkles, Cpu, Palette, Globe, Wifi, MapPin,
-  FileText, ArrowRight, Phone, MessageCircle, Shield, Check,
+  FileText, ArrowRight, Phone, MessageCircle, Shield, Check, History,
+  Smartphone, QrCode, GraduationCap,
 } from "lucide-react";
 import { toast } from "sonner";
 import { createFileRoute } from "@tanstack/react-router";
