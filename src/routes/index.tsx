@@ -719,7 +719,7 @@ function TOSModal() {
 function FloatingWhatsApp() {
   return (
     <a
-      href={`https://wa.me/${WA}`}
+      href="https://wa.me/919346528844?text=Hi%20Onyx%20Studio,%20I%27d%20like%20to%20know%20more%20about%20your%20services."
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
