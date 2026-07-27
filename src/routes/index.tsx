@@ -32,17 +32,149 @@ const TYPES = [
   "Local Business Growth",
 ];
 
-const SERVICES = [
-  { icon: FileText, title: "AI Resumes & Project Reports", desc: "ATS-optimized AI resumes printed on premium glossy paper, plus formatted & spiral-bound B.Tech lab reports and seminar PPTs." },
-  { icon: Palette, title: "Custom AI Art & Framing", desc: "Transform selfies, couple photos, or pets into Royal Oil Paintings, Cyberpunk, or Anime art. Printed in high-res and beautifully framed." },
-  { icon: Cpu, title: "Custom PC Building", desc: "Professional assembly, cable management, and stress testing. You bring the parts, we build the beast.", tag: "Starting ₹4,000" },
-  { icon: Globe, title: "Web Development & Hosting", desc: "Interactive websites built fast for local businesses, with monthly hosting & maintenance plans." },
-  { icon: Wifi, title: "Smart TV & Home Tech Setup", desc: "Smart TV ad-blocking, Wi-Fi dead-zone fixing, NAS personal cloud setups, and PC deep cleaning.", tag: "₹500/visit" },
-  { icon: MapPin, title: "Google Maps & WhatsApp Business", desc: "Get your local shop verified on Google Maps with automated WhatsApp business greeting bots." },
-  { icon: History, title: "AI Heritage Photo Restoration", desc: "Bring faded, torn, or black-and-white family photos back to life. Colorized, enhanced, printed in high-res, and elegantly framed." },
-  { icon: Smartphone, title: "NFC Smart Business Cards", desc: "The last business card you will ever need. Tap to share your custom digital profile, built and hosted by us." },
-  { icon: QrCode, title: "Digital QR Menus for Restaurants", desc: "Sleek, contactless digital menus for your cafe, complete with premium acrylic table standees." },
-  { icon: GraduationCap, title: "Academic & Professional Portfolios", desc: "Stand out for US/UK Master's applications or tech interviews with a custom, interactive personal website." },
+type Service = {
+  icon: typeof FileText;
+  title: string;
+  desc: string;
+  tag?: string;
+  whatItIs: string;
+  whatWeOffer: string[];
+  benefits: string;
+};
+
+const SERVICES: Service[] = [
+  {
+    icon: FileText,
+    title: "AI Resumes & Project Reports",
+    desc: "ATS-optimized AI resumes printed on premium glossy paper, plus formatted & spiral-bound B.Tech lab reports and seminar PPTs.",
+    whatItIs: "AI-crafted, recruiter-ready resumes and academic documents — engineered to pass ATS filters and land interviews, then delivered as pixel-perfect printed copies you can hand over with confidence.",
+    whatWeOffer: [
+      "ATS-optimized resume writing with keyword tuning for your target role",
+      "Premium glossy or matte printing with cover-letter matching design",
+      "Formatted & spiral-bound B.Tech lab reports, seminar reports and PPTs",
+      "Editable master file so you can update it later yourself",
+    ],
+    benefits: "A polished, professionally structured document dramatically increases callback rates and grading impressions — this is one of the highest-ROI investments a student or job seeker can make.",
+  },
+  {
+    icon: Palette,
+    title: "Custom AI Art & Framing",
+    desc: "Transform selfies, couple photos, or pets into Royal Oil Paintings, Cyberpunk, or Anime art. Printed in high-res and beautifully framed.",
+    whatItIs: "Your favourite memories reimagined as museum-grade AI artwork — Royal Oil, Cyberpunk, Anime, Studio Ghibli and more — then printed and framed as a keepsake worth hanging on a wall.",
+    whatWeOffer: [
+      "Multiple art style options: Royal Oil, Cyberpunk, Anime, Watercolor",
+      "High-resolution printing on premium photo or canvas stock",
+      "Elegant frame options in wood, black or minimal metal",
+      "Digital high-res copy included for phones and socials",
+    ],
+    benefits: "A deeply personal gift or statement piece for your home at a fraction of a commissioned artist's cost — perfect for anniversaries, birthdays, weddings and housewarmings.",
+  },
+  {
+    icon: Cpu,
+    title: "Custom PC Building",
+    desc: "Professional assembly, cable management, and stress testing. You bring the parts, we build the beast.",
+    tag: "Starting ₹4,000",
+    whatItIs: "You buy the parts, we build the machine. Precision assembly with clean cable management, thermal tuning and full stress testing before it ever reaches your desk.",
+    whatWeOffer: [
+      "Full assembly of gaming, editing or workstation builds",
+      "Neat cable management and airflow-optimized layout",
+      "BIOS setup, Windows install and essential driver stack",
+      "Stress & thermal testing report before handover",
+    ],
+    benefits: "Avoid costly mistakes bending pins, mismounting coolers or under-cooling your GPU. A properly built PC runs cooler, quieter and lasts significantly longer than a rushed self-build.",
+  },
+  {
+    icon: Globe,
+    title: "Web Development & Hosting",
+    desc: "Interactive websites built fast for local businesses, with monthly hosting & maintenance plans.",
+    whatItIs: "Modern, mobile-first websites for local businesses — built fast, hosted reliably and maintained monthly so you never have to worry about the tech side of your online presence.",
+    whatWeOffer: [
+      "Custom single-page or multi-page websites with modern animations",
+      "Domain setup, SSL and reliable hosting configuration",
+      "Contact forms, WhatsApp integration and Google Maps embed",
+      "Monthly maintenance, backups and content updates",
+    ],
+    benefits: "A professional website is the single strongest trust signal for a local business today. Customers Google you before they call — we make sure what they find converts.",
+  },
+  {
+    icon: Wifi,
+    title: "Smart TV & Home Tech Setup",
+    desc: "Smart TV ad-blocking, Wi-Fi dead-zone fixing, NAS personal cloud setups, and PC deep cleaning.",
+    tag: "₹500/visit",
+    whatItIs: "On-site home tech visits that quietly fix the small annoyances slowing down your daily life — laggy TV, weak Wi-Fi in the bedroom, a dusty overheating PC, or scattered photos with no backup.",
+    whatWeOffer: [
+      "Smart TV ad-blocking and streaming optimization",
+      "Wi-Fi dead-zone diagnosis, router placement and mesh setup",
+      "Personal cloud (NAS) setup for photos, movies and backups",
+      "PC deep cleaning, re-pasting and Windows tune-up",
+    ],
+    benefits: "One short visit gives you a faster, cleaner, better-protected digital home — with no jargon, no upselling, and no repeat callbacks for the same problem.",
+  },
+  {
+    icon: MapPin,
+    title: "Google Maps & WhatsApp Business",
+    desc: "Get your local shop verified on Google Maps with automated WhatsApp business greeting bots.",
+    whatItIs: "Get discovered on Google Maps and respond to customers instantly on WhatsApp — the two channels where local buyers in Visakhapatnam actually find and message local shops today.",
+    whatWeOffer: [
+      "Google Business Profile creation and verification support",
+      "Optimized listing with photos, hours, services and categories",
+      "WhatsApp Business setup with catalog and quick replies",
+      "Automated greeting and away-message bot configuration",
+    ],
+    benefits: "Show up when nearby customers search, and never miss an enquiry again. This is the fastest, cheapest way for a local shop to compete with bigger brands online.",
+  },
+  {
+    icon: History,
+    title: "AI Heritage Photo Restoration",
+    desc: "Bring faded, torn, or black-and-white family photos back to life. Colorized, enhanced, printed in high-res, and elegantly framed.",
+    whatItIs: "Old family photos — faded, scratched, torn or black-and-white — carefully restored with AI, tastefully colorized, and re-printed in high resolution so the memory looks as vivid as the day it was taken.",
+    whatWeOffer: [
+      "Damage repair: scratches, tears, stains, missing corners",
+      "Face enhancement and gentle, realistic colorization",
+      "High-resolution reprint on premium photo paper",
+      "Optional elegant framing to gift or display at home",
+    ],
+    benefits: "Irreplaceable memories of grandparents, weddings and childhood deserve better than fading in an old album. This is a heartfelt, one-of-a-kind gift for parents and elders.",
+  },
+  {
+    icon: Smartphone,
+    title: "NFC Smart Business Cards",
+    desc: "The last business card you will ever need. Tap to share your custom digital profile, built and hosted by us.",
+    whatItIs: "A premium NFC-enabled card that instantly shares your entire digital profile — links, portfolio, socials, WhatsApp, payments — with a single tap on any modern phone. No app required.",
+    whatWeOffer: [
+      "Premium NFC card with your custom brand design",
+      "Fully hosted digital profile page built and maintained by us",
+      "Editable profile: update your links anytime, card never changes",
+      "Analytics on taps, clicks and profile visits",
+    ],
+    benefits: "Never run out of business cards, never hand out an outdated one. Stand out instantly at meetings, events and pitches — and look years ahead of competitors still using paper.",
+  },
+  {
+    icon: QrCode,
+    title: "Digital QR Menus for Restaurants",
+    desc: "Sleek, contactless digital menus for your cafe, complete with premium acrylic table standees.",
+    whatItIs: "A sleek, always-up-to-date digital menu that your customers open by scanning a QR code on a premium acrylic table standee — no app, no reprints, no more crossed-out items.",
+    whatWeOffer: [
+      "Beautifully designed mobile-first digital menu",
+      "Premium acrylic table standees with your branding",
+      "Instant menu updates for prices, specials and stock-outs",
+      "Optional order-on-WhatsApp integration for takeaway",
+    ],
+    benefits: "Save thousands on reprints every time prices change, reduce order errors, and give your cafe a modern, hygienic first impression that customers genuinely appreciate.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Academic & Professional Portfolios",
+    desc: "Stand out for US/UK Master's applications or tech interviews with a custom, interactive personal website.",
+    whatItIs: "A custom, interactive personal portfolio website that showcases your projects, research and personality — designed to make you memorable in competitive Master's applications and tech interviews.",
+    whatWeOffer: [
+      "Bespoke design tailored to your field and story",
+      "Project case studies with visuals, code links and outcomes",
+      "SEO setup so recruiters and admissions find your name",
+      "Custom domain, hosting and one round of major revisions",
+    ],
+    benefits: "Admissions committees and hiring managers Google every serious candidate. A polished portfolio replaces a dozen bullet points and can be the single differentiator that gets you shortlisted.",
+  },
 ];
 
 const ESTIMATOR = [
