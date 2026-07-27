@@ -32,17 +32,149 @@ const TYPES = [
   "Local Business Growth",
 ];
 
-const SERVICES = [
-  { icon: FileText, title: "AI Resumes & Project Reports", desc: "ATS-optimized AI resumes printed on premium glossy paper, plus formatted & spiral-bound B.Tech lab reports and seminar PPTs." },
-  { icon: Palette, title: "Custom AI Art & Framing", desc: "Transform selfies, couple photos, or pets into Royal Oil Paintings, Cyberpunk, or Anime art. Printed in high-res and beautifully framed." },
-  { icon: Cpu, title: "Custom PC Building", desc: "Professional assembly, cable management, and stress testing. You bring the parts, we build the beast.", tag: "Starting ₹4,000" },
-  { icon: Globe, title: "Web Development & Hosting", desc: "Interactive websites built fast for local businesses, with monthly hosting & maintenance plans." },
-  { icon: Wifi, title: "Smart TV & Home Tech Setup", desc: "Smart TV ad-blocking, Wi-Fi dead-zone fixing, NAS personal cloud setups, and PC deep cleaning.", tag: "₹500/visit" },
-  { icon: MapPin, title: "Google Maps & WhatsApp Business", desc: "Get your local shop verified on Google Maps with automated WhatsApp business greeting bots." },
-  { icon: History, title: "AI Heritage Photo Restoration", desc: "Bring faded, torn, or black-and-white family photos back to life. Colorized, enhanced, printed in high-res, and elegantly framed." },
-  { icon: Smartphone, title: "NFC Smart Business Cards", desc: "The last business card you will ever need. Tap to share your custom digital profile, built and hosted by us." },
-  { icon: QrCode, title: "Digital QR Menus for Restaurants", desc: "Sleek, contactless digital menus for your cafe, complete with premium acrylic table standees." },
-  { icon: GraduationCap, title: "Academic & Professional Portfolios", desc: "Stand out for US/UK Master's applications or tech interviews with a custom, interactive personal website." },
+type Service = {
+  icon: typeof FileText;
+  title: string;
+  desc: string;
+  tag?: string;
+  whatItIs: string;
+  whatWeOffer: string[];
+  benefits: string;
+};
+
+const SERVICES: Service[] = [
+  {
+    icon: FileText,
+    title: "AI Resumes & Project Reports",
+    desc: "ATS-optimized AI resumes printed on premium glossy paper, plus formatted & spiral-bound B.Tech lab reports and seminar PPTs.",
+    whatItIs: "AI-crafted, recruiter-ready resumes and academic documents — engineered to pass ATS filters and land interviews, then delivered as pixel-perfect printed copies you can hand over with confidence.",
+    whatWeOffer: [
+      "ATS-optimized resume writing with keyword tuning for your target role",
+      "Premium glossy or matte printing with cover-letter matching design",
+      "Formatted & spiral-bound B.Tech lab reports, seminar reports and PPTs",
+      "Editable master file so you can update it later yourself",
+    ],
+    benefits: "A polished, professionally structured document dramatically increases callback rates and grading impressions — this is one of the highest-ROI investments a student or job seeker can make.",
+  },
+  {
+    icon: Palette,
+    title: "Custom AI Art & Framing",
+    desc: "Transform selfies, couple photos, or pets into Royal Oil Paintings, Cyberpunk, or Anime art. Printed in high-res and beautifully framed.",
+    whatItIs: "Your favourite memories reimagined as museum-grade AI artwork — Royal Oil, Cyberpunk, Anime, Studio Ghibli and more — then printed and framed as a keepsake worth hanging on a wall.",
+    whatWeOffer: [
+      "Multiple art style options: Royal Oil, Cyberpunk, Anime, Watercolor",
+      "High-resolution printing on premium photo or canvas stock",
+      "Elegant frame options in wood, black or minimal metal",
+      "Digital high-res copy included for phones and socials",
+    ],
+    benefits: "A deeply personal gift or statement piece for your home at a fraction of a commissioned artist's cost — perfect for anniversaries, birthdays, weddings and housewarmings.",
+  },
+  {
+    icon: Cpu,
+    title: "Custom PC Building",
+    desc: "Professional assembly, cable management, and stress testing. You bring the parts, we build the beast.",
+    tag: "Starting ₹4,000",
+    whatItIs: "You buy the parts, we build the machine. Precision assembly with clean cable management, thermal tuning and full stress testing before it ever reaches your desk.",
+    whatWeOffer: [
+      "Full assembly of gaming, editing or workstation builds",
+      "Neat cable management and airflow-optimized layout",
+      "BIOS setup, Windows install and essential driver stack",
+      "Stress & thermal testing report before handover",
+    ],
+    benefits: "Avoid costly mistakes bending pins, mismounting coolers or under-cooling your GPU. A properly built PC runs cooler, quieter and lasts significantly longer than a rushed self-build.",
+  },
+  {
+    icon: Globe,
+    title: "Web Development & Hosting",
+    desc: "Interactive websites built fast for local businesses, with monthly hosting & maintenance plans.",
+    whatItIs: "Modern, mobile-first websites for local businesses — built fast, hosted reliably and maintained monthly so you never have to worry about the tech side of your online presence.",
+    whatWeOffer: [
+      "Custom single-page or multi-page websites with modern animations",
+      "Domain setup, SSL and reliable hosting configuration",
+      "Contact forms, WhatsApp integration and Google Maps embed",
+      "Monthly maintenance, backups and content updates",
+    ],
+    benefits: "A professional website is the single strongest trust signal for a local business today. Customers Google you before they call — we make sure what they find converts.",
+  },
+  {
+    icon: Wifi,
+    title: "Smart TV & Home Tech Setup",
+    desc: "Smart TV ad-blocking, Wi-Fi dead-zone fixing, NAS personal cloud setups, and PC deep cleaning.",
+    tag: "₹500/visit",
+    whatItIs: "On-site home tech visits that quietly fix the small annoyances slowing down your daily life — laggy TV, weak Wi-Fi in the bedroom, a dusty overheating PC, or scattered photos with no backup.",
+    whatWeOffer: [
+      "Smart TV ad-blocking and streaming optimization",
+      "Wi-Fi dead-zone diagnosis, router placement and mesh setup",
+      "Personal cloud (NAS) setup for photos, movies and backups",
+      "PC deep cleaning, re-pasting and Windows tune-up",
+    ],
+    benefits: "One short visit gives you a faster, cleaner, better-protected digital home — with no jargon, no upselling, and no repeat callbacks for the same problem.",
+  },
+  {
+    icon: MapPin,
+    title: "Google Maps & WhatsApp Business",
+    desc: "Get your local shop verified on Google Maps with automated WhatsApp business greeting bots.",
+    whatItIs: "Get discovered on Google Maps and respond to customers instantly on WhatsApp — the two channels where local buyers in Visakhapatnam actually find and message local shops today.",
+    whatWeOffer: [
+      "Google Business Profile creation and verification support",
+      "Optimized listing with photos, hours, services and categories",
+      "WhatsApp Business setup with catalog and quick replies",
+      "Automated greeting and away-message bot configuration",
+    ],
+    benefits: "Show up when nearby customers search, and never miss an enquiry again. This is the fastest, cheapest way for a local shop to compete with bigger brands online.",
+  },
+  {
+    icon: History,
+    title: "AI Heritage Photo Restoration",
+    desc: "Bring faded, torn, or black-and-white family photos back to life. Colorized, enhanced, printed in high-res, and elegantly framed.",
+    whatItIs: "Old family photos — faded, scratched, torn or black-and-white — carefully restored with AI, tastefully colorized, and re-printed in high resolution so the memory looks as vivid as the day it was taken.",
+    whatWeOffer: [
+      "Damage repair: scratches, tears, stains, missing corners",
+      "Face enhancement and gentle, realistic colorization",
+      "High-resolution reprint on premium photo paper",
+      "Optional elegant framing to gift or display at home",
+    ],
+    benefits: "Irreplaceable memories of grandparents, weddings and childhood deserve better than fading in an old album. This is a heartfelt, one-of-a-kind gift for parents and elders.",
+  },
+  {
+    icon: Smartphone,
+    title: "NFC Smart Business Cards",
+    desc: "The last business card you will ever need. Tap to share your custom digital profile, built and hosted by us.",
+    whatItIs: "A premium NFC-enabled card that instantly shares your entire digital profile — links, portfolio, socials, WhatsApp, payments — with a single tap on any modern phone. No app required.",
+    whatWeOffer: [
+      "Premium NFC card with your custom brand design",
+      "Fully hosted digital profile page built and maintained by us",
+      "Editable profile: update your links anytime, card never changes",
+      "Analytics on taps, clicks and profile visits",
+    ],
+    benefits: "Never run out of business cards, never hand out an outdated one. Stand out instantly at meetings, events and pitches — and look years ahead of competitors still using paper.",
+  },
+  {
+    icon: QrCode,
+    title: "Digital QR Menus for Restaurants",
+    desc: "Sleek, contactless digital menus for your cafe, complete with premium acrylic table standees.",
+    whatItIs: "A sleek, always-up-to-date digital menu that your customers open by scanning a QR code on a premium acrylic table standee — no app, no reprints, no more crossed-out items.",
+    whatWeOffer: [
+      "Beautifully designed mobile-first digital menu",
+      "Premium acrylic table standees with your branding",
+      "Instant menu updates for prices, specials and stock-outs",
+      "Optional order-on-WhatsApp integration for takeaway",
+    ],
+    benefits: "Save thousands on reprints every time prices change, reduce order errors, and give your cafe a modern, hygienic first impression that customers genuinely appreciate.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Academic & Professional Portfolios",
+    desc: "Stand out for US/UK Master's applications or tech interviews with a custom, interactive personal website.",
+    whatItIs: "A custom, interactive personal portfolio website that showcases your projects, research and personality — designed to make you memorable in competitive Master's applications and tech interviews.",
+    whatWeOffer: [
+      "Bespoke design tailored to your field and story",
+      "Project case studies with visuals, code links and outcomes",
+      "SEO setup so recruiters and admissions find your name",
+      "Custom domain, hosting and one round of major revisions",
+    ],
+    benefits: "Admissions committees and hiring managers Google every serious candidate. A polished portfolio replaces a dozen bullet points and can be the single differentiator that gets you shortlisted.",
+  },
 ];
 
 const ESTIMATOR = [
@@ -199,28 +331,155 @@ function Hero() {
 }
 
 function Services() {
+  const [active, setActive] = useState<Service | null>(null);
   return (
     <section id="services" className="relative py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow="What we build" title={<>Ten services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally." />
+        <SectionHeading eyebrow="What we build" title={<>Ten services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally. Tap any card to explore." />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ delay: i * 0.05 }}>
-              <Card className="neon-border neon-hover group h-full bg-card/60 p-6 backdrop-blur">
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand shadow-neon">
-                    <s.icon className="h-5 w-5 text-primary-foreground" />
+              <button
+                type="button"
+                onClick={() => setActive(s)}
+                className="block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded-2xl"
+              >
+                <Card className="neon-border neon-hover group h-full bg-card/60 p-6 backdrop-blur cursor-pointer">
+                  <div className="mb-5 flex items-center justify-between">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand shadow-neon">
+                      <s.icon className="h-5 w-5 text-primary-foreground" />
+                    </div>
+                    {s.tag && <span className="rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-2.5 py-1 text-xs font-medium text-neon-cyan">{s.tag}</span>}
                   </div>
-                  {s.tag && <span className="rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-2.5 py-1 text-xs font-medium text-neon-cyan">{s.tag}</span>}
-                </div>
-                <h3 className="text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-              </Card>
+                  <h3 className="text-lg font-semibold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-neon-cyan opacity-0 transition-opacity group-hover:opacity-100">
+                    Learn more <ArrowRight className="h-3 w-3" />
+                  </span>
+                </Card>
+              </button>
             </motion.div>
           ))}
         </div>
       </div>
+      <ServiceModal service={active} onClose={() => setActive(null)} />
     </section>
+  );
+}
+
+function ServiceModal({ service, onClose }: { service: Service | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!service) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [service, onClose]);
+
+  return (
+    <AnimatePresence>
+      {service && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-background/70 backdrop-blur-md"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={service.title}
+            className="relative z-10 w-full max-w-2xl max-h-[88vh] overflow-hidden rounded-2xl"
+            initial={{ opacity: 0, scale: 0.94, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 10 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24 }}
+          >
+            {/* Neon gradient border wrapper */}
+            <div className="rounded-2xl bg-gradient-brand p-[1.5px] shadow-neon">
+              <div className="relative rounded-2xl bg-card/90 backdrop-blur-xl">
+                <button
+                  onClick={onClose}
+                  aria-label="Close"
+                  className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border border-border bg-background/70 text-foreground transition hover:shadow-neon hover:border-neon-cyan/60"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+                <div className="max-h-[88vh] overflow-y-auto p-6 sm:p-8">
+                  <div className="flex items-start gap-4 pr-10">
+                    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-brand shadow-neon">
+                      <service.icon className="h-6 w-6 text-primary-foreground" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-2xl font-bold leading-tight sm:text-3xl">{service.title}</h3>
+                      {service.tag && (
+                        <span className="mt-2 inline-block rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-2.5 py-1 text-xs font-medium text-neon-cyan">{service.tag}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <section className="mt-8">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-neon-cyan">What It Is</h4>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{service.whatItIs}</p>
+                  </section>
+
+                  <section className="mt-8">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-neon-cyan">What We Offer</h4>
+                    <ul className="mt-4 space-y-3">
+                      {service.whatWeOffer.map((f) => (
+                        <li key={f} className="flex items-start gap-3 text-sm sm:text-base">
+                          <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-neon-cyan/15 text-neon-cyan">
+                            <Check className="h-3 w-3" />
+                          </span>
+                          <span className="text-foreground/90">{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section className="mt-8">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-neon-cyan">Pros & Benefits</h4>
+                    <div
+                      className="relative mt-4 overflow-hidden rounded-xl border border-neon-purple/40 p-5 sm:p-6"
+                      style={{
+                        background:
+                          "radial-gradient(120% 120% at 0% 0%, color-mix(in oklab, var(--neon-purple) 22%, transparent), transparent 60%), radial-gradient(120% 120% at 100% 100%, color-mix(in oklab, var(--neon-cyan) 18%, transparent), transparent 60%)",
+                        boxShadow: "var(--shadow-neon)",
+                      }}
+                    >
+                      <p className="text-sm leading-relaxed text-foreground/95 sm:text-base">{service.benefits}</p>
+                    </div>
+                  </section>
+
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a
+                      href={`https://wa.me/${WA}?text=${encodeURIComponent(`Hi Onyx Studio, I'd like to know more about "${service.title}".`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1"
+                    >
+                      <Button className="w-full bg-gradient-brand text-primary-foreground shadow-neon hover:opacity-95">
+                        Enquire on WhatsApp <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </a>
+                    <Button variant="outline" onClick={onClose} className="sm:w-32">Close</Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
