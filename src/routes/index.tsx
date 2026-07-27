@@ -331,28 +331,155 @@ function Hero() {
 }
 
 function Services() {
+  const [active, setActive] = useState<Service | null>(null);
   return (
     <section id="services" className="relative py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow="What we build" title={<>Ten services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally." />
+        <SectionHeading eyebrow="What we build" title={<>Ten services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally. Tap any card to explore." />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ delay: i * 0.05 }}>
-              <Card className="neon-border neon-hover group h-full bg-card/60 p-6 backdrop-blur">
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand shadow-neon">
-                    <s.icon className="h-5 w-5 text-primary-foreground" />
+              <button
+                type="button"
+                onClick={() => setActive(s)}
+                className="block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded-2xl"
+              >
+                <Card className="neon-border neon-hover group h-full bg-card/60 p-6 backdrop-blur cursor-pointer">
+                  <div className="mb-5 flex items-center justify-between">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand shadow-neon">
+                      <s.icon className="h-5 w-5 text-primary-foreground" />
+                    </div>
+                    {s.tag && <span className="rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-2.5 py-1 text-xs font-medium text-neon-cyan">{s.tag}</span>}
                   </div>
-                  {s.tag && <span className="rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-2.5 py-1 text-xs font-medium text-neon-cyan">{s.tag}</span>}
-                </div>
-                <h3 className="text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-              </Card>
+                  <h3 className="text-lg font-semibold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-neon-cyan opacity-0 transition-opacity group-hover:opacity-100">
+                    Learn more <ArrowRight className="h-3 w-3" />
+                  </span>
+                </Card>
+              </button>
             </motion.div>
           ))}
         </div>
       </div>
+      <ServiceModal service={active} onClose={() => setActive(null)} />
     </section>
+  );
+}
+
+function ServiceModal({ service, onClose }: { service: Service | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!service) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [service, onClose]);
+
+  return (
+    <AnimatePresence>
+      {service && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-background/70 backdrop-blur-md"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={service.title}
+            className="relative z-10 w-full max-w-2xl max-h-[88vh] overflow-hidden rounded-2xl"
+            initial={{ opacity: 0, scale: 0.94, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 10 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24 }}
+          >
+            {/* Neon gradient border wrapper */}
+            <div className="rounded-2xl bg-gradient-brand p-[1.5px] shadow-neon">
+              <div className="relative rounded-2xl bg-card/90 backdrop-blur-xl">
+                <button
+                  onClick={onClose}
+                  aria-label="Close"
+                  className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border border-border bg-background/70 text-foreground transition hover:shadow-neon hover:border-neon-cyan/60"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+                <div className="max-h-[88vh] overflow-y-auto p-6 sm:p-8">
+                  <div className="flex items-start gap-4 pr-10">
+                    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-brand shadow-neon">
+                      <service.icon className="h-6 w-6 text-primary-foreground" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-2xl font-bold leading-tight sm:text-3xl">{service.title}</h3>
+                      {service.tag && (
+                        <span className="mt-2 inline-block rounded-full border border-neon-cyan/40 bg-neon-cyan/10 px-2.5 py-1 text-xs font-medium text-neon-cyan">{service.tag}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <section className="mt-8">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-neon-cyan">What It Is</h4>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{service.whatItIs}</p>
+                  </section>
+
+                  <section className="mt-8">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-neon-cyan">What We Offer</h4>
+                    <ul className="mt-4 space-y-3">
+                      {service.whatWeOffer.map((f) => (
+                        <li key={f} className="flex items-start gap-3 text-sm sm:text-base">
+                          <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-neon-cyan/15 text-neon-cyan">
+                            <Check className="h-3 w-3" />
+                          </span>
+                          <span className="text-foreground/90">{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section className="mt-8">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-neon-cyan">Pros & Benefits</h4>
+                    <div
+                      className="relative mt-4 overflow-hidden rounded-xl border border-neon-purple/40 p-5 sm:p-6"
+                      style={{
+                        background:
+                          "radial-gradient(120% 120% at 0% 0%, color-mix(in oklab, var(--neon-purple) 22%, transparent), transparent 60%), radial-gradient(120% 120% at 100% 100%, color-mix(in oklab, var(--neon-cyan) 18%, transparent), transparent 60%)",
+                        boxShadow: "var(--shadow-neon)",
+                      }}
+                    >
+                      <p className="text-sm leading-relaxed text-foreground/95 sm:text-base">{service.benefits}</p>
+                    </div>
+                  </section>
+
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a
+                      href={`https://wa.me/${WA}?text=${encodeURIComponent(`Hi Onyx Studio, I'd like to know more about "${service.title}".`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1"
+                    >
+                      <Button className="w-full bg-gradient-brand text-primary-foreground shadow-neon hover:opacity-95">
+                        Enquire on WhatsApp <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </a>
+                    <Button variant="outline" onClick={onClose} className="sm:w-32">Close</Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
