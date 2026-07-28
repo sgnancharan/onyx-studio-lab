@@ -217,6 +217,19 @@ const PC_TIERS = [
   { id: "complex", label: "Complex PC Build (ITX / Custom Loop / Heavy RGB)", price: 5000 },
 ];
 
+const NAS_TIERS = [
+  { id: "none", label: "None", price: 0 },
+  { id: "basic", label: "Basic Network/TV Visit", price: 500 },
+  { id: "mini", label: "Mini Cloud Server Setup - BYOD", price: 4999 },
+  { id: "pro", label: "Pro 4-Bay Barebones Media Server - Intel CPU, 8GB RAM, 128GB OS", price: 34999 },
+];
+
+const STREAMING_TIERS = [
+  { id: "none", label: "Standard Apps", price: 0 },
+  { id: "six", label: "Uninterrupted 4K Premium Setup - 6 Months", price: 3000 },
+  { id: "year", label: "Uninterrupted 4K Premium Setup - 1 Year", price: 5000 },
+];
+
 const STICKER_PRICE = 40; // per sticker
 const PRINT_PRICE = 60;   // per print
 
@@ -518,14 +531,20 @@ function ServiceModal({ service, onClose }: { service: Service | null; onClose: 
 function Estimator() {
   const [selected, setSelected] = useState<Record<string, boolean>>({ web: true });
   const [pcTier, setPcTier] = useState<string>("standard");
+  const [nasTier, setNasTier] = useState<string>("none");
+  const [streamingTier, setStreamingTier] = useState<string>("none");
   const [posters, setPosters] = useState(2);
   const [stickers, setStickers] = useState(10);
   const [prints, setPrints] = useState(4);
   const posterPrice = 349;
   const pcPrice = PC_TIERS.find((t) => t.id === pcTier)?.price ?? 0;
+  const nasPrice = NAS_TIERS.find((t) => t.id === nasTier)?.price ?? 0;
+  const streamingPrice = STREAMING_TIERS.find((t) => t.id === streamingTier)?.price ?? 0;
   const total =
     ESTIMATOR.reduce((sum, s) => sum + (selected[s.id] ? s.price : 0), 0)
     + pcPrice
+    + nasPrice
+    + streamingPrice
     + posters * posterPrice
     + stickers * STICKER_PRICE
     + prints * PRINT_PRICE;
@@ -553,6 +572,56 @@ function Estimator() {
                 </SelectTrigger>
                 <SelectContent>
                   {PC_TIERS.map((t) => (
+                    <SelectItem key={t.id} value={t.id}>
+                      {t.label}{t.price ? ` — ₹${t.price.toLocaleString("en-IN")}` : ""}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Home Server & NAS tier selector */}
+            <div className="mb-4 rounded-xl border border-neon-purple/40 bg-accent/30 p-4 shadow-neon">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold">Home Server & NAS</div>
+                  <div className="text-xs text-muted-foreground">Personal cloud, media server, or basic visit</div>
+                </div>
+                <span className="shrink-0 text-sm font-semibold text-neon-cyan">
+                  {nasPrice ? `₹${nasPrice.toLocaleString("en-IN")}` : "—"}
+                </span>
+              </div>
+              <Select value={nasTier} onValueChange={setNasTier}>
+                <SelectTrigger className="w-full border-border bg-secondary/40">
+                  <SelectValue placeholder="Select NAS option" />
+                </SelectTrigger>
+                <SelectContent>
+                  {NAS_TIERS.map((t) => (
+                    <SelectItem key={t.id} value={t.id}>
+                      {t.label}{t.price ? ` — ₹${t.price.toLocaleString("en-IN")}` : ""}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Premium 4K Cloud Streaming tier selector */}
+            <div className="mb-4 rounded-xl border border-neon-purple/40 bg-accent/30 p-4 shadow-neon">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold">Premium 4K Cloud Streaming</div>
+                  <div className="text-xs text-muted-foreground">Uninterrupted 4K setup duration</div>
+                </div>
+                <span className="shrink-0 text-sm font-semibold text-neon-cyan">
+                  {streamingPrice ? `₹${streamingPrice.toLocaleString("en-IN")}` : "—"}
+                </span>
+              </div>
+              <Select value={streamingTier} onValueChange={setStreamingTier}>
+                <SelectTrigger className="w-full border-border bg-secondary/40">
+                  <SelectValue placeholder="Select streaming plan" />
+                </SelectTrigger>
+                <SelectContent>
+                  {STREAMING_TIERS.map((t) => (
                     <SelectItem key={t.id} value={t.id}>
                       {t.label}{t.price ? ` — ₹${t.price.toLocaleString("en-IN")}` : ""}
                     </SelectItem>
