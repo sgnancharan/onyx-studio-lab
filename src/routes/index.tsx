@@ -175,9 +175,33 @@ const SERVICES: Service[] = [
     ],
     benefits: "Admissions committees and hiring managers Google every serious candidate. A polished portfolio replaces a dozen bullet points and can be the single differentiator that gets you shortlisted.",
   },
+  {
+    icon: Sticker,
+    title: "Custom Brand Stickers & Decals",
+    desc: "High-quality, waterproof vinyl stickers for laptops, business branding, and product packaging.",
+    whatItIs: "Custom-printed stickers on highly durable, waterproof vinyl. Precision hand-cut for local businesses needing branded packaging or tech enthusiasts wanting custom laptop decals.",
+    whatWeOffer: [
+      "Full-color, high-resolution inkjet printing",
+      "Waterproof and tear-resistant glossy vinyl material",
+      "Precision hand-cut shapes tailored to your logo or design",
+      "Small batch printing with no minimum order requirements",
+    ],
+    benefits: "Stop relying on cheap paper stickers that fade and peel. Our premium vinyl decals offer extreme durability and a professional gloss finish, making them the most cost-effective physical marketing tool for your brand or the perfect personalized aesthetic upgrade for your tech gear.",
+  },
+  {
+    icon: Printer,
+    title: "Precision Printing (Passport to Large Format)",
+    desc: "Professional, high-resolution photo prints ranging from instant passport-size photos to large-format posters and specialized media.",
+    whatItIs: "Professional-grade printing services handling everything from standard passport-size identity photos to large A4/A3 posters, blueprints, and custom media prints.",
+    whatWeOffer: [
+      "Instant, high-resolution passport and ID photo printing",
+      "Large-format poster and technical blueprint printing",
+      "Specialty media support including textured fine art, glossy, and matte finishes",
+      "Precision finishing, laminating, and cutting",
+    ],
+    benefits: "Elevate your presentation with crisp, high-resolution prints. Whether you need urgent, perfectly sized passport photos for an application or stunning, durable posters for a local Vizag event, we guarantee professional physical outputs that standard office printers simply cannot match.",
+  },
 ];
-
-const ESTIMATOR = [
   { id: "pc", label: "Custom PC Build (assembly)", price: 4000 },
   { id: "nas", label: "Home NAS / Cloud Setup", price: 2500 },
   { id: "resume", label: "AI Resume (printed)", price: 499 },
