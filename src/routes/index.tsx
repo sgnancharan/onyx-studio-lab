@@ -531,14 +531,20 @@ function ServiceModal({ service, onClose }: { service: Service | null; onClose: 
 function Estimator() {
   const [selected, setSelected] = useState<Record<string, boolean>>({ web: true });
   const [pcTier, setPcTier] = useState<string>("standard");
+  const [nasTier, setNasTier] = useState<string>("none");
+  const [streamingTier, setStreamingTier] = useState<string>("none");
   const [posters, setPosters] = useState(2);
   const [stickers, setStickers] = useState(10);
   const [prints, setPrints] = useState(4);
   const posterPrice = 349;
   const pcPrice = PC_TIERS.find((t) => t.id === pcTier)?.price ?? 0;
+  const nasPrice = NAS_TIERS.find((t) => t.id === nasTier)?.price ?? 0;
+  const streamingPrice = STREAMING_TIERS.find((t) => t.id === streamingTier)?.price ?? 0;
   const total =
     ESTIMATOR.reduce((sum, s) => sum + (selected[s.id] ? s.price : 0), 0)
     + pcPrice
+    + nasPrice
+    + streamingPrice
     + posters * posterPrice
     + stickers * STICKER_PRICE
     + prints * PRINT_PRICE;
