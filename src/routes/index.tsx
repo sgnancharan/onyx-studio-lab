@@ -516,10 +516,19 @@ function ServiceModal({ service, onClose }: { service: Service | null; onClose: 
 }
 
 function Estimator() {
-  const [selected, setSelected] = useState<Record<string, boolean>>({ pc: true });
+  const [selected, setSelected] = useState<Record<string, boolean>>({ web: true });
+  const [pcTier, setPcTier] = useState<string>("standard");
   const [posters, setPosters] = useState(2);
+  const [stickers, setStickers] = useState(10);
+  const [prints, setPrints] = useState(4);
   const posterPrice = 349;
-  const total = ESTIMATOR.reduce((sum, s) => sum + (selected[s.id] ? s.price : 0), 0) + posters * posterPrice;
+  const pcPrice = PC_TIERS.find((t) => t.id === pcTier)?.price ?? 0;
+  const total =
+    ESTIMATOR.reduce((sum, s) => sum + (selected[s.id] ? s.price : 0), 0)
+    + pcPrice
+    + posters * posterPrice
+    + stickers * STICKER_PRICE
+    + prints * PRINT_PRICE;
 
   return (
     <section id="estimator" className="relative py-24">
@@ -527,6 +536,31 @@ function Estimator() {
         <SectionHeading eyebrow="Interactive" title={<>Estimate your <span className="text-gradient">project</span></>} subtitle="Toggle what you need. Prices are indicative starting points — final quotes confirmed on WhatsApp." />
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_360px]">
           <Card className="neon-border bg-card/60 p-6 backdrop-blur">
+            {/* Custom PC Build tier selector */}
+            <div className="mb-4 rounded-xl border border-neon-purple/40 bg-accent/30 p-4 shadow-neon">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold">Custom PC Build</div>
+                  <div className="text-xs text-muted-foreground">Choose the complexity tier</div>
+                </div>
+                <span className="shrink-0 text-sm font-semibold text-neon-cyan">
+                  {pcPrice ? `₹${pcPrice.toLocaleString("en-IN")}` : "—"}
+                </span>
+              </div>
+              <Select value={pcTier} onValueChange={setPcTier}>
+                <SelectTrigger className="w-full border-border bg-secondary/40">
+                  <SelectValue placeholder="Select build type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {PC_TIERS.map((t) => (
+                    <SelectItem key={t.id} value={t.id}>
+                      {t.label}{t.price ? ` — ₹${t.price.toLocaleString("en-IN")}` : ""}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="grid gap-3 sm:grid-cols-2">
               {ESTIMATOR.map((s) => {
                 const active = !!selected[s.id];
@@ -541,15 +575,40 @@ function Estimator() {
                 );
               })}
             </div>
-            <div className="mt-6 rounded-xl border border-border bg-secondary/30 p-4">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <div className="text-sm font-medium">AI Posters (framed prints)</div>
-                  <div className="text-xs text-muted-foreground">₹{posterPrice} each</div>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-border bg-secondary/30 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-medium">AI Posters (framed)</div>
+                    <div className="text-xs text-muted-foreground">₹{posterPrice} each</div>
+                  </div>
+                  <div className="text-2xl font-bold text-gradient">{posters}</div>
                 </div>
-                <div className="text-2xl font-bold text-gradient">{posters}</div>
+                <Slider value={[posters]} min={0} max={10} step={1} onValueChange={(v) => setPosters(v[0])} className="mt-4" />
               </div>
-              <Slider value={[posters]} min={0} max={10} step={1} onValueChange={(v) => setPosters(v[0])} className="mt-4" />
+
+              <div className="rounded-xl border border-border bg-secondary/30 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-medium">Vinyl Stickers</div>
+                    <div className="text-xs text-muted-foreground">₹{STICKER_PRICE} each</div>
+                  </div>
+                  <div className="text-2xl font-bold text-gradient">{stickers}</div>
+                </div>
+                <Slider value={[stickers]} min={0} max={100} step={5} onValueChange={(v) => setStickers(v[0])} className="mt-4" />
+              </div>
+
+              <div className="rounded-xl border border-border bg-secondary/30 p-4 sm:col-span-2">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-medium">Passport / Poster Prints</div>
+                    <div className="text-xs text-muted-foreground">₹{PRINT_PRICE} each (avg)</div>
+                  </div>
+                  <div className="text-2xl font-bold text-gradient">{prints}</div>
+                </div>
+                <Slider value={[prints]} min={0} max={50} step={1} onValueChange={(v) => setPrints(v[0])} className="mt-4" />
+              </div>
             </div>
           </Card>
           <Card className="neon-border bg-card/60 p-6 backdrop-blur flex flex-col">
