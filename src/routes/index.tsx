@@ -217,6 +217,19 @@ const PC_TIERS = [
   { id: "complex", label: "Complex PC Build (ITX / Custom Loop / Heavy RGB)", price: 5000 },
 ];
 
+const NAS_TIERS = [
+  { id: "none", label: "None", price: 0 },
+  { id: "basic", label: "Basic Network/TV Visit", price: 500 },
+  { id: "mini", label: "Mini Cloud Server Setup - BYOD", price: 4999 },
+  { id: "pro", label: "Pro 4-Bay Barebones Media Server - Intel CPU, 8GB RAM, 128GB OS", price: 34999 },
+];
+
+const STREAMING_TIERS = [
+  { id: "none", label: "Standard Apps", price: 0 },
+  { id: "six", label: "Uninterrupted 4K Premium Setup - 6 Months", price: 3000 },
+  { id: "year", label: "Uninterrupted 4K Premium Setup - 1 Year", price: 5000 },
+];
+
 const STICKER_PRICE = 40; // per sticker
 const PRINT_PRICE = 60;   // per print
 
