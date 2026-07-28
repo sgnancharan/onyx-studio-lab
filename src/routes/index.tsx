@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Sun, Moon, Menu, X, Sparkles, Cpu, Palette, Globe, Wifi, MapPin,
   FileText, ArrowRight, Phone, MessageCircle, Shield, Check, History,
-  Smartphone, QrCode, GraduationCap,
+  Smartphone, QrCode, GraduationCap, Sticker, Printer,
 } from "lucide-react";
 import { toast } from "sonner";
 import { createFileRoute } from "@tanstack/react-router";
@@ -73,10 +73,10 @@ const SERVICES: Service[] = [
     icon: Cpu,
     title: "Custom PC Building",
     desc: "Professional assembly, cable management, and stress testing. You bring the parts, we build the beast.",
-    tag: "Starting ₹4,000",
+    tag: "₹4,000 – ₹5,000",
     whatItIs: "You buy the parts, we build the machine. Precision assembly with clean cable management, thermal tuning and full stress testing before it ever reaches your desk.",
     whatWeOffer: [
-      "Full assembly of gaming, editing or workstation builds",
+      "Assembly fee ranges from ₹4,000 to ₹5,000 depending on the complexity of the build (e.g., custom water cooling, ITX form factors, or extensive RGB routing)",
       "Neat cable management and airflow-optimized layout",
       "BIOS setup, Windows install and essential driver stack",
       "Stress & thermal testing report before handover",
@@ -175,16 +175,50 @@ const SERVICES: Service[] = [
     ],
     benefits: "Admissions committees and hiring managers Google every serious candidate. A polished portfolio replaces a dozen bullet points and can be the single differentiator that gets you shortlisted.",
   },
+  {
+    icon: Sticker,
+    title: "Custom Brand Stickers & Decals",
+    desc: "High-quality, waterproof vinyl stickers for laptops, business branding, and product packaging.",
+    whatItIs: "Custom-printed stickers on highly durable, waterproof vinyl. Precision hand-cut for local businesses needing branded packaging or tech enthusiasts wanting custom laptop decals.",
+    whatWeOffer: [
+      "Full-color, high-resolution inkjet printing",
+      "Waterproof and tear-resistant glossy vinyl material",
+      "Precision hand-cut shapes tailored to your logo or design",
+      "Small batch printing with no minimum order requirements",
+    ],
+    benefits: "Stop relying on cheap paper stickers that fade and peel. Our premium vinyl decals offer extreme durability and a professional gloss finish, making them the most cost-effective physical marketing tool for your brand or the perfect personalized aesthetic upgrade for your tech gear.",
+  },
+  {
+    icon: Printer,
+    title: "Precision Printing (Passport to Large Format)",
+    desc: "Professional, high-resolution photo prints ranging from instant passport-size photos to large-format posters and specialized media.",
+    whatItIs: "Professional-grade printing services handling everything from standard passport-size identity photos to large A4/A3 posters, blueprints, and custom media prints.",
+    whatWeOffer: [
+      "Instant, high-resolution passport and ID photo printing",
+      "Large-format poster and technical blueprint printing",
+      "Specialty media support including textured fine art, glossy, and matte finishes",
+      "Precision finishing, laminating, and cutting",
+    ],
+    benefits: "Elevate your presentation with crisp, high-resolution prints. Whether you need urgent, perfectly sized passport photos for an application or stunning, durable posters for a local Vizag event, we guarantee professional physical outputs that standard office printers simply cannot match.",
+  },
 ];
 
 const ESTIMATOR = [
-  { id: "pc", label: "Custom PC Build (assembly)", price: 4000 },
   { id: "nas", label: "Home NAS / Cloud Setup", price: 2500 },
   { id: "resume", label: "AI Resume (printed)", price: 499 },
   { id: "wifi", label: "Wi-Fi Dead-Zone Fix", price: 500 },
   { id: "web", label: "Starter Website (1 page)", price: 6000 },
   { id: "maps", label: "Google Maps Verification", price: 1500 },
 ];
+
+const PC_TIERS = [
+  { id: "none", label: "No PC Build", price: 0 },
+  { id: "standard", label: "Standard PC Build (Air Cooled / AIO)", price: 4000 },
+  { id: "complex", label: "Complex PC Build (ITX / Custom Loop / Heavy RGB)", price: 5000 },
+];
+
+const STICKER_PRICE = 40; // per sticker
+const PRINT_PRICE = 60;   // per print
 
 function Landing() {
   const [dark, setDark] = useState(true);
@@ -215,10 +249,8 @@ function Landing() {
 
 function Brand({ className = "" }: { className?: string }) {
   return (
-    <a href="#top" className={`flex items-center gap-2 font-display text-xl font-bold tracking-tight ${className}`}>
-      <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-brand shadow-neon">
-        <Sparkles className="h-4 w-4 text-primary-foreground" />
-      </span>
+    <a href="#top" className={`flex items-center gap-3 font-display text-xl font-bold tracking-tight ${className}`}>
+      <img src="/lov.png" alt="Onyx Studio Logo" className="h-10 w-auto object-contain drop-shadow-[0_0_12px_rgba(120,120,255,0.35)]" />
       <span className="text-gradient">Onyx Studio</span>
     </a>
   );
@@ -335,7 +367,7 @@ function Services() {
   return (
     <section id="services" className="relative py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow="What we build" title={<>Ten services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally. Tap any card to explore." />
+        <SectionHeading eyebrow="What we build" title={<>Twelve services, <span className="text-gradient">one studio</span></>} subtitle="From hardware to hosting to AI-generated visuals — practical work delivered locally. Tap any card to explore." />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ delay: i * 0.05 }}>
@@ -484,10 +516,19 @@ function ServiceModal({ service, onClose }: { service: Service | null; onClose: 
 }
 
 function Estimator() {
-  const [selected, setSelected] = useState<Record<string, boolean>>({ pc: true });
+  const [selected, setSelected] = useState<Record<string, boolean>>({ web: true });
+  const [pcTier, setPcTier] = useState<string>("standard");
   const [posters, setPosters] = useState(2);
+  const [stickers, setStickers] = useState(10);
+  const [prints, setPrints] = useState(4);
   const posterPrice = 349;
-  const total = ESTIMATOR.reduce((sum, s) => sum + (selected[s.id] ? s.price : 0), 0) + posters * posterPrice;
+  const pcPrice = PC_TIERS.find((t) => t.id === pcTier)?.price ?? 0;
+  const total =
+    ESTIMATOR.reduce((sum, s) => sum + (selected[s.id] ? s.price : 0), 0)
+    + pcPrice
+    + posters * posterPrice
+    + stickers * STICKER_PRICE
+    + prints * PRINT_PRICE;
 
   return (
     <section id="estimator" className="relative py-24">
@@ -495,6 +536,31 @@ function Estimator() {
         <SectionHeading eyebrow="Interactive" title={<>Estimate your <span className="text-gradient">project</span></>} subtitle="Toggle what you need. Prices are indicative starting points — final quotes confirmed on WhatsApp." />
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_360px]">
           <Card className="neon-border bg-card/60 p-6 backdrop-blur">
+            {/* Custom PC Build tier selector */}
+            <div className="mb-4 rounded-xl border border-neon-purple/40 bg-accent/30 p-4 shadow-neon">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold">Custom PC Build</div>
+                  <div className="text-xs text-muted-foreground">Choose the complexity tier</div>
+                </div>
+                <span className="shrink-0 text-sm font-semibold text-neon-cyan">
+                  {pcPrice ? `₹${pcPrice.toLocaleString("en-IN")}` : "—"}
+                </span>
+              </div>
+              <Select value={pcTier} onValueChange={setPcTier}>
+                <SelectTrigger className="w-full border-border bg-secondary/40">
+                  <SelectValue placeholder="Select build type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {PC_TIERS.map((t) => (
+                    <SelectItem key={t.id} value={t.id}>
+                      {t.label}{t.price ? ` — ₹${t.price.toLocaleString("en-IN")}` : ""}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="grid gap-3 sm:grid-cols-2">
               {ESTIMATOR.map((s) => {
                 const active = !!selected[s.id];
@@ -509,15 +575,40 @@ function Estimator() {
                 );
               })}
             </div>
-            <div className="mt-6 rounded-xl border border-border bg-secondary/30 p-4">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <div className="text-sm font-medium">AI Posters (framed prints)</div>
-                  <div className="text-xs text-muted-foreground">₹{posterPrice} each</div>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-border bg-secondary/30 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-medium">AI Posters (framed)</div>
+                    <div className="text-xs text-muted-foreground">₹{posterPrice} each</div>
+                  </div>
+                  <div className="text-2xl font-bold text-gradient">{posters}</div>
                 </div>
-                <div className="text-2xl font-bold text-gradient">{posters}</div>
+                <Slider value={[posters]} min={0} max={10} step={1} onValueChange={(v) => setPosters(v[0])} className="mt-4" />
               </div>
-              <Slider value={[posters]} min={0} max={10} step={1} onValueChange={(v) => setPosters(v[0])} className="mt-4" />
+
+              <div className="rounded-xl border border-border bg-secondary/30 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-medium">Vinyl Stickers</div>
+                    <div className="text-xs text-muted-foreground">₹{STICKER_PRICE} each</div>
+                  </div>
+                  <div className="text-2xl font-bold text-gradient">{stickers}</div>
+                </div>
+                <Slider value={[stickers]} min={0} max={100} step={5} onValueChange={(v) => setStickers(v[0])} className="mt-4" />
+              </div>
+
+              <div className="rounded-xl border border-border bg-secondary/30 p-4 sm:col-span-2">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-medium">Passport / Poster Prints</div>
+                    <div className="text-xs text-muted-foreground">₹{PRINT_PRICE} each (avg)</div>
+                  </div>
+                  <div className="text-2xl font-bold text-gradient">{prints}</div>
+                </div>
+                <Slider value={[prints]} min={0} max={50} step={1} onValueChange={(v) => setPrints(v[0])} className="mt-4" />
+              </div>
             </div>
           </Card>
           <Card className="neon-border bg-card/60 p-6 backdrop-blur flex flex-col">
