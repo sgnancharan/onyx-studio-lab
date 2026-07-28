@@ -73,7 +73,7 @@ const SERVICES: Service[] = [
     icon: Cpu,
     title: "Custom PC Building",
     desc: "Professional assembly, cable management, and stress testing. You bring the parts, we build the beast.",
-    tag: "₹4,000 – ₹5,000",
+    tag: "₹4,999 – ₹5,999",
     whatItIs: "You buy the parts, we build the machine. Precision assembly with clean cable management, thermal tuning and full stress testing before it ever reaches your desk.",
     whatWeOffer: [
       "Assembly fee ranges from ₹4,000 to ₹5,000 depending on the complexity of the build (e.g., custom water cooling, ITX form factors, or extensive RGB routing)",
@@ -100,7 +100,7 @@ const SERVICES: Service[] = [
     icon: Wifi,
     title: "Smart TV & Home Tech Setup",
     desc: "Smart TV ad-blocking, Wi-Fi dead-zone fixing, NAS personal cloud setups, and PC deep cleaning.",
-    tag: "₹500/visit",
+    tag: "₹499/visit",
     whatItIs: "On-site home tech visits that quietly fix the small annoyances slowing down your daily life — laggy TV, weak Wi-Fi in the bedroom, a dusty overheating PC, or scattered photos with no backup.",
     whatWeOffer: [
       "Smart TV ad-blocking and streaming optimization",
