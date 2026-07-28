@@ -580,6 +580,56 @@ function Estimator() {
               </Select>
             </div>
 
+            {/* Home Server & NAS tier selector */}
+            <div className="mb-4 rounded-xl border border-neon-purple/40 bg-accent/30 p-4 shadow-neon">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold">Home Server & NAS</div>
+                  <div className="text-xs text-muted-foreground">Personal cloud, media server, or basic visit</div>
+                </div>
+                <span className="shrink-0 text-sm font-semibold text-neon-cyan">
+                  {nasPrice ? `₹${nasPrice.toLocaleString("en-IN")}` : "—"}
+                </span>
+              </div>
+              <Select value={nasTier} onValueChange={setNasTier}>
+                <SelectTrigger className="w-full border-border bg-secondary/40">
+                  <SelectValue placeholder="Select NAS option" />
+                </SelectTrigger>
+                <SelectContent>
+                  {NAS_TIERS.map((t) => (
+                    <SelectItem key={t.id} value={t.id}>
+                      {t.label}{t.price ? ` — ₹${t.price.toLocaleString("en-IN")}` : ""}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Premium 4K Cloud Streaming tier selector */}
+            <div className="mb-4 rounded-xl border border-neon-purple/40 bg-accent/30 p-4 shadow-neon">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold">Premium 4K Cloud Streaming</div>
+                  <div className="text-xs text-muted-foreground">Uninterrupted 4K setup duration</div>
+                </div>
+                <span className="shrink-0 text-sm font-semibold text-neon-cyan">
+                  {streamingPrice ? `₹${streamingPrice.toLocaleString("en-IN")}` : "—"}
+                </span>
+              </div>
+              <Select value={streamingTier} onValueChange={setStreamingTier}>
+                <SelectTrigger className="w-full border-border bg-secondary/40">
+                  <SelectValue placeholder="Select streaming plan" />
+                </SelectTrigger>
+                <SelectContent>
+                  {STREAMING_TIERS.map((t) => (
+                    <SelectItem key={t.id} value={t.id}>
+                      {t.label}{t.price ? ` — ₹${t.price.toLocaleString("en-IN")}` : ""}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="grid gap-3 sm:grid-cols-2">
               {ESTIMATOR.map((s) => {
                 const active = !!selected[s.id];
