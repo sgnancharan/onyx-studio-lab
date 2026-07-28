@@ -249,10 +249,8 @@ function Landing() {
 
 function Brand({ className = "" }: { className?: string }) {
   return (
-    <a href="#top" className={`flex items-center gap-2 font-display text-xl font-bold tracking-tight ${className}`}>
-      <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-brand shadow-neon">
-        <Sparkles className="h-4 w-4 text-primary-foreground" />
-      </span>
+    <a href="#top" className={`flex items-center gap-3 font-display text-xl font-bold tracking-tight ${className}`}>
+      <img src="/lov.png" alt="Onyx Studio Logo" className="h-10 w-auto object-contain drop-shadow-[0_0_12px_rgba(120,120,255,0.35)]" />
       <span className="text-gradient">Onyx Studio</span>
     </a>
   );
