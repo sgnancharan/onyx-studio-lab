@@ -73,7 +73,7 @@ const SERVICES: Service[] = [
     icon: Cpu,
     title: "Custom PC Building",
     desc: "Professional assembly, cable management, and stress testing. You bring the parts, we build the beast.",
-    tag: "₹4,999 – ₹5,999",
+    tag: "₹3,999 – ₹4,999",
     whatItIs: "You buy the parts, we build the machine. Precision assembly with clean cable management, thermal tuning and full stress testing before it ever reaches your desk.",
     whatWeOffer: [
       "Assembly fee ranges from ₹4,000 to ₹5,000 depending on the complexity of the build (e.g., custom water cooling, ITX form factors, or extensive RGB routing)",
