@@ -204,30 +204,29 @@ const SERVICES: Service[] = [
 ];
 
 const ESTIMATOR = [
-  { id: "nas", label: "Home NAS / Cloud Setup", price: 2500 },
   { id: "resume", label: "AI Resume (printed)", price: 499 },
-  { id: "wifi", label: "Wi-Fi Dead-Zone Fix", price: 500 },
-  { id: "web", label: "Starter Website (1 page)", price: 6000 },
-  { id: "maps", label: "Google Maps Verification", price: 1500 },
+  { id: "wifi", label: "Wi-Fi Dead-Zone Fix", price: 499 },
+  { id: "web", label: "Starter Website (1 page)", price: 5999 },
+  { id: "maps", label: "Google Maps Verification", price: 1499 },
 ];
 
 const PC_TIERS = [
   { id: "none", label: "No PC Build", price: 0 },
-  { id: "standard", label: "Standard PC Build (Air Cooled / AIO)", price: 4000 },
-  { id: "complex", label: "Complex PC Build (ITX / Custom Loop / Heavy RGB)", price: 5000 },
+  { id: "standard", label: "Standard PC Build (Air Cooled / AIO)", price: 4999 },
+  { id: "complex", label: "Complex PC Build (ITX / Custom Loop / Heavy RGB)", price: 5999 },
 ];
 
 const NAS_TIERS = [
   { id: "none", label: "None", price: 0 },
-  { id: "basic", label: "Basic Network/TV Visit", price: 500 },
+  { id: "basic", label: "Basic Network/TV Visit", price: 499 },
   { id: "mini", label: "Mini Cloud Server Setup - BYOD", price: 4999 },
   { id: "pro", label: "Pro 4-Bay Barebones Media Server - Intel CPU, 8GB RAM, 128GB OS", price: 34999 },
 ];
 
 const STREAMING_TIERS = [
   { id: "none", label: "Standard Apps", price: 0 },
-  { id: "six", label: "Uninterrupted 4K Premium Setup - 6 Months", price: 3000 },
-  { id: "year", label: "Uninterrupted 4K Premium Setup - 1 Year", price: 5000 },
+  { id: "six", label: "Uninterrupted 4K Premium Setup - 6 Months", price: 2999 },
+  { id: "year", label: "Uninterrupted 4K Premium Setup - 1 Year", price: 4999 },
 ];
 
 const STICKER_PRICE = 40; // per sticker
