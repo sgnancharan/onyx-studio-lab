@@ -528,7 +528,7 @@ function ServiceModal({ service, onClose }: { service: Service | null; onClose: 
 }
 
 function Estimator() {
-  const [selected, setSelected] = useState<Record<string, boolean>>({ web: true });
+  const [selected, setSelected] = useState<Record<string, boolean>>({ web: false });
   const [pcTier, setPcTier] = useState<string>("standard");
   const [nasTier, setNasTier] = useState<string>("none");
   const [streamingTier, setStreamingTier] = useState<string>("none");
