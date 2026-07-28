@@ -202,13 +202,23 @@ const SERVICES: Service[] = [
     benefits: "Elevate your presentation with crisp, high-resolution prints. Whether you need urgent, perfectly sized passport photos for an application or stunning, durable posters for a local Vizag event, we guarantee professional physical outputs that standard office printers simply cannot match.",
   },
 ];
-  { id: "pc", label: "Custom PC Build (assembly)", price: 4000 },
+
+const ESTIMATOR = [
   { id: "nas", label: "Home NAS / Cloud Setup", price: 2500 },
   { id: "resume", label: "AI Resume (printed)", price: 499 },
   { id: "wifi", label: "Wi-Fi Dead-Zone Fix", price: 500 },
   { id: "web", label: "Starter Website (1 page)", price: 6000 },
   { id: "maps", label: "Google Maps Verification", price: 1500 },
 ];
+
+const PC_TIERS = [
+  { id: "none", label: "No PC Build", price: 0 },
+  { id: "standard", label: "Standard PC Build (Air Cooled / AIO)", price: 4000 },
+  { id: "complex", label: "Complex PC Build (ITX / Custom Loop / Heavy RGB)", price: 5000 },
+];
+
+const STICKER_PRICE = 40; // per sticker
+const PRINT_PRICE = 60;   // per print
 
 function Landing() {
   const [dark, setDark] = useState(true);
