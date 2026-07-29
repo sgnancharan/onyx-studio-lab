@@ -246,7 +246,8 @@ function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background/40 backdrop-blur-md text-foreground">
+      <TechBackground />
       <Header scrolled={scrolled} dark={dark} onToggle={() => setDark(toggleTheme() === "dark")} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Hero />
       <Services />
