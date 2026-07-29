@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
+import { TechBackground } from "@/components/TechBackground";
 import { toggleTheme } from "@/lib/theme";
 
 export const Route = createFileRoute("/")({ component: Landing });
