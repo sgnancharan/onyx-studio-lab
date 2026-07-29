@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
+import { TechBackground } from "@/components/TechBackground";
 import { toggleTheme } from "@/lib/theme";
 
 export const Route = createFileRoute("/")({ component: Landing });
@@ -246,7 +247,8 @@ function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background/40 backdrop-blur-md text-foreground">
+      <TechBackground />
       <Header scrolled={scrolled} dark={dark} onToggle={() => setDark(toggleTheme() === "dark")} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Hero />
       <Services />
