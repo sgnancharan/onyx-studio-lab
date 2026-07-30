@@ -8,11 +8,14 @@ export function VantaBackground({ dark }: { dark: boolean }) {
     let cancelled = false;
     (async () => {
       const THREE = await import("three");
-      const mod = await import("vanta/dist/vanta.net.min");
+      (window as unknown as { THREE?: unknown }).THREE = THREE;
+      await import("vanta/dist/vanta.net.min");
       if (cancelled || !ref.current) return;
+      const NET = (window as unknown as { VANTA?: { NET?: (o: Record<string, unknown>) => { destroy: () => void } } }).VANTA?.NET;
+      if (!NET) return;
       effect.current?.destroy();
-      const NET = (mod as unknown as { default: (o: Record<string, unknown>) => { destroy: () => void } }).default;
       effect.current = NET({
+
         el: ref.current,
         THREE,
         mouseControls: true,
