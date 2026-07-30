@@ -351,12 +351,10 @@ function Typewriter() {
 const HERO_VIDEOS_LEFT = [
   { src: pcVideo.url, label: "Custom PC Build" },
   { src: pcVideo2.url, label: "Cable Management & RGB" },
-  { src: pcVideo.url, label: "Benchmarking & Tuning" },
 ];
 
 const HERO_VIDEOS_RIGHT = [
   { src: nasVideo.url, label: "NAS & Home Server" },
-  { src: serverVideo.url, label: "Network Switch Setup" },
   { src: serverVideo.url, label: "Server Room" },
 ];
 
