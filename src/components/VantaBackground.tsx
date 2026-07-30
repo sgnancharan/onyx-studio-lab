@@ -9,7 +9,7 @@ export function VantaBackground({ dark }: { dark: boolean }) {
     (async () => {
       const THREE = await import("three");
       (window as unknown as { THREE?: unknown }).THREE = THREE;
-      await import("vanta/dist/vanta.net.min");
+      await import("vanta/dist/vanta.net.min.js");
       if (cancelled || !ref.current) return;
       const NET = (window as unknown as { VANTA?: { NET?: (o: Record<string, unknown>) => { destroy: () => void } } }).VANTA?.NET;
       if (!NET) return;
