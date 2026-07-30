@@ -25,12 +25,14 @@ export function VantaBackground({ dark }: { dark: boolean }) {
         minWidth: 200.0,
         scale: 1.0,
         scaleMobile: 1.0,
-        points: 11.0,
+        points: 15.0,
         maxDistance: 22.0,
         spacing: 17.0,
         showDots: true,
+        showLines: true,
+        backgroundAlpha: 1.0,
         backgroundColor: dark ? 0x050505 : 0xffffff,
-        color: dark ? 0x00f0ff : 0x0055ff,
+        color: dark ? 0x00ff00 : 0x00aa00,
       });
     })();
     return () => {
