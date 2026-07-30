@@ -18,7 +18,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { TechBackground } from "@/components/TechBackground";
+import { VantaBackground } from "@/components/VantaBackground";
+import nasVideo from "@/assets/NAS.mp4.asset.json";
+import pcVideo from "@/assets/PC_Build.mp4.asset.json";
+import pcVideo2 from "@/assets/PC_Build_2.mp4.asset.json";
+import serverVideo from "@/assets/Server_Room.mp4.asset.json";
+
 import { toggleTheme } from "@/lib/theme";
 
 export const Route = createFileRoute("/")({ component: Landing });
@@ -234,12 +239,12 @@ const STICKER_PRICE = 40; // per sticker
 const PRINT_PRICE = 60;   // per print
 
 function Landing() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setDark(!document.documentElement.classList.contains("light"));
+    setDark(document.documentElement.classList.contains("dark"));
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -247,8 +252,9 @@ function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background/40 backdrop-blur-md text-foreground">
-      <TechBackground />
+    <div className="min-h-screen text-foreground">
+      <VantaBackground dark={dark} />
+
       <Header scrolled={scrolled} dark={dark} onToggle={() => setDark(toggleTheme() === "dark")} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Hero />
       <Services />
@@ -342,39 +348,87 @@ function Typewriter() {
   );
 }
 
-function Hero() {
+const HERO_VIDEOS_LEFT = [
+  { src: pcVideo.url, label: "Custom PC Build" },
+  { src: pcVideo2.url, label: "Cable Management & RGB" },
+  { src: pcVideo.url, label: "Benchmarking & Tuning" },
+];
+
+const HERO_VIDEOS_RIGHT = [
+  { src: nasVideo.url, label: "NAS & Home Server" },
+  { src: serverVideo.url, label: "Network Switch Setup" },
+  { src: serverVideo.url, label: "Server Room" },
+];
+
+function VideoCard({ src, label }: { src: string; label: string }) {
   return (
-    <section className="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
-      <div className="absolute inset-0 -z-10 animate-gradient" style={{ backgroundImage: "var(--gradient-hero)" }} />
-      <div className="pointer-events-none absolute -top-24 -left-24 -z-10 h-96 w-96 rounded-full bg-neon-purple/30 blur-3xl animate-float-slow" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 -z-10 h-96 w-96 rounded-full bg-neon-cyan/20 blur-3xl animate-float-slow" />
-      <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 glass px-4 py-1.5 text-xs text-muted-foreground">
-          <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan shadow-glow-cyan" />
-          Based in Visakhapatnam · Tech · AI · Creative
-        </motion.div>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="text-balance text-4xl font-bold leading-[1.05] sm:text-6xl md:text-7xl">
-          Next-Gen <span className="text-gradient">Tech, AI & Digital</span> Solutions in Visakhapatnam
-        </motion.h1>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-          We build&nbsp;<Typewriter />
-        </motion.p>
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="mt-10 flex flex-wrap justify-center gap-3">
-          <a href="#contact">
-            <Button size="lg" className="bg-gradient-brand text-primary-foreground shadow-neon hover:shadow-glow-cyan hover:opacity-95">
-              Book a Service <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </a>
-          <a href="#services">
-            <Button size="lg" variant="outline" className="border-border bg-secondary/40 backdrop-blur">
-              Explore Services
-            </Button>
-          </a>
-        </motion.div>
+    <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/20 dark:border-white/10 transform transition-transform hover:scale-105 duration-300">
+      <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+        <source src={src} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+      <span className="absolute bottom-2 left-2 text-[11px] font-medium text-white/90 drop-shadow">{label}</span>
+    </div>
+  );
+}
+
+function HeroCopy() {
+  return (
+    <div className="text-center">
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 glass px-4 py-1.5 text-xs text-muted-foreground">
+        <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan shadow-glow-cyan" />
+        Based in Visakhapatnam · Tech · AI · Creative
+      </motion.div>
+      <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }} className="text-balance text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+        Next-Gen <span className="text-gradient">Tech, AI & Digital</span> Solutions in Visakhapatnam
+      </motion.h1>
+      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+        We build&nbsp;<Typewriter />
+      </motion.p>
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="mt-10 flex flex-wrap justify-center gap-3">
+        <a href="#contact">
+          <Button size="lg" className="bg-gradient-brand text-primary-foreground shadow-neon hover:shadow-glow-cyan hover:opacity-95">
+            Book a Service <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </a>
+        <a href="#services">
+          <Button size="lg" variant="outline" className="border-border bg-secondary/40 backdrop-blur">
+            Explore Services
+          </Button>
+        </a>
+      </motion.div>
+    </div>
+  );
+}
+
+function Hero() {
+  const all = [...HERO_VIDEOS_LEFT, ...HERO_VIDEOS_RIGHT];
+  return (
+    <section className="relative pt-28 pb-20 sm:pt-36 sm:pb-28">
+      {/* Desktop: 3-column grid */}
+      <div className="mx-auto hidden max-w-7xl grid-cols-12 items-center gap-6 px-4 sm:px-6 lg:grid">
+        <div className="col-span-3 flex flex-col gap-4">
+          {HERO_VIDEOS_LEFT.map((v, i) => <VideoCard key={`l${i}`} {...v} />)}
+        </div>
+        <div className="col-span-6">
+          <HeroCopy />
+        </div>
+        <div className="col-span-3 flex flex-col gap-4">
+          {HERO_VIDEOS_RIGHT.map((v, i) => <VideoCard key={`r${i}`} {...v} />)}
+        </div>
+      </div>
+
+      {/* Mobile / tablet: text first, then 2-col video grid */}
+      <div className="mx-auto flex max-w-3xl flex-col gap-8 px-4 sm:px-6 lg:hidden">
+        <HeroCopy />
+        <div className="grid grid-cols-2 gap-3">
+          {all.map((v, i) => <VideoCard key={`m${i}`} {...v} />)}
+        </div>
       </div>
     </section>
   );
 }
+
 
 function Services() {
   const [active, setActive] = useState<Service | null>(null);

@@ -38,7 +38,9 @@
 }
 
 :root {
+  color-scheme: light;
   --radius: 0.875rem;
+
   /* Dark by default */
   --background: oklch(0.14 0.03 265);
   --foreground: oklch(0.98 0.005 250);
@@ -163,3 +165,5 @@
 @utility animate-float-slow { animation: float-slow 12s ease-in-out infinite; }
 @utility animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4,0,0.6,1) infinite; }
 @utility animate-caret { animation: blink 1s step-end infinite; }
+
+.dark { color-scheme: dark; }

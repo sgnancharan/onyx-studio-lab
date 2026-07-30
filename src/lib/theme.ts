@@ -1,10 +1,11 @@
 export function initTheme() {
   if (typeof document === "undefined") return;
   const stored = localStorage.getItem("theme");
-  const isLight = stored === "light";
+  const isLight = stored !== "dark";
   document.documentElement.classList.toggle("light", isLight);
   document.documentElement.classList.toggle("dark", !isLight);
 }
+
 
 export function toggleTheme(): "light" | "dark" {
   const isLight = document.documentElement.classList.toggle("light");
