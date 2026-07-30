@@ -18,7 +18,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { TechBackground } from "@/components/TechBackground";
+import { VantaBackground } from "@/components/VantaBackground";
+import nasVideo from "@/assets/NAS.mp4.asset.json";
+import pcVideo from "@/assets/PC_Build.mp4.asset.json";
+import pcVideo2 from "@/assets/PC_Build_2.mp4.asset.json";
+import serverVideo from "@/assets/Server_Room.mp4.asset.json";
+
 import { toggleTheme } from "@/lib/theme";
 
 export const Route = createFileRoute("/")({ component: Landing });
