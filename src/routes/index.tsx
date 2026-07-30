@@ -239,12 +239,12 @@ const STICKER_PRICE = 40; // per sticker
 const PRINT_PRICE = 60;   // per print
 
 function Landing() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setDark(!document.documentElement.classList.contains("light"));
+    setDark(document.documentElement.classList.contains("dark"));
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -252,8 +252,9 @@ function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background/40 backdrop-blur-md text-foreground">
-      <TechBackground />
+    <div className="min-h-screen text-foreground">
+      <VantaBackground dark={dark} />
+
       <Header scrolled={scrolled} dark={dark} onToggle={() => setDark(toggleTheme() === "dark")} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Hero />
       <Services />
